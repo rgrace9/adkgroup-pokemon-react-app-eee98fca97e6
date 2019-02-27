@@ -6,8 +6,9 @@ import { connect } from "react-redux";
 import * as actions from "./redux/actions";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.setTitle("POKEMON`");
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
   render() {
@@ -15,15 +16,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ title }) => {
-  return {
-    title
-  };
-};
-
-const VisibleApp = connect(
-  mapStateToProps,
-  actions
-)(App);
-
-export default VisibleApp;
+export default App;

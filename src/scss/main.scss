@@ -1,6 +1,16 @@
 body {
-  background: yellow;
+  background: #d7d4d4;
+
   h1 {
-    color: red;
+    color: black;
+  }
+
+  .search-container {
+    border-radius: 2px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    display: block;
+    border: 2px solid black;
+    height: 20px;
+    width: 175px;
   }
 }
