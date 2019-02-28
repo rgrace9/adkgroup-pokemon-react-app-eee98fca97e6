@@ -8,12 +8,15 @@ class SearchContainer extends Component {
     super(props);
     this.state = {
       search: "",
+      pokemonUrl: "",
+      details: "",
       pokemons: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.pokemonSearch = this.pokemonSearch.bind(this);
+    this.pokemonAdvancedSearch = this.pokemonAdvancedSearch.bind(this);
   }
 
   pokemonSearch(pokemon) {
@@ -31,7 +34,30 @@ class SearchContainer extends Component {
       .then(pokemonInfo => {
         console.log(pokemonInfo);
         this.setState({
-          search: pokemonInfo
+          search: pokemonInfo,
+          pokemonUrl: pokemonInfo.forms[0].url
+        });
+        console.log(this.state.pokemonUrl);
+      })
+      .catch(error => console.log(`Error in fetch: ${error.message}`));
+  }
+
+  pokemonAdvancedSearch(url) {
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(pokemonInfo => {
+        console.log(pokemonInfo);
+        this.setState({
+          details: pokemonInfo
         });
       })
       .catch(error => console.log(`Error in fetch: ${error.message}`));
@@ -70,7 +96,11 @@ class SearchContainer extends Component {
           />
         </form>
         <div>
-          <InfoBox pokemon={this.state.search} />
+          <InfoBox
+            pokemon={this.state.search}
+            url={this.state.pokemonUrl}
+            pokemonAdvancedSearch={this.pokemonAdvancedSearch}
+          />
         </div>
       </div>
     );
