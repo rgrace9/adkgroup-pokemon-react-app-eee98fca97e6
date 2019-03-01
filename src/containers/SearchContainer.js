@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import InfoBox from "./InfoBox";
-import PokemonField from "../components/PokemonField";
+import PokemonGraph from "./PokemonGraph";
+
 import Select from "react-select";
 //recharts
 
@@ -12,6 +13,9 @@ class SearchContainer extends Component {
       image: "",
       details: "",
       pokemonType: "",
+      defense: "",
+      attack: "",
+      speed: "",
       selectedOption: null,
       pokemonResults: []
     };
@@ -63,7 +67,10 @@ class SearchContainer extends Component {
         this.setState({
           search: pokemonInfo,
           image: pokemonInfo.sprites.front_default,
-          pokemonType: pokemonInfo.types[0].type.name
+          pokemonType: pokemonInfo.types[0].type.name,
+          defense: pokemonInfo.stats[3].base_stat,
+          attack: pokemonInfo.stats[4].base_stat,
+          speed: pokemonInfo.stats[0].base_stat
         });
       })
       .catch(error => console.log(`Error in fetch: ${error.message}`));
@@ -84,21 +91,34 @@ class SearchContainer extends Component {
   render() {
     const { selectedOption } = this.state;
     return (
-      <div>
-        <h1>Search for Pokémon</h1>
-        <form onSubmit={this.handleSubmit}>
-          <Select
-            className="search-container"
-            options={this.state.pokemonResults}
-            onChange={this.handleChange}
-            value={selectedOption}
-          />
-        </form>
-        <div>
-          <InfoBox
-            pokemon={this.state.search}
-            image={this.state.image}
-            pokemonType={this.state.pokemonType}
+      <div className="row">
+        <div className="column">
+          <h1>Search for Pokémon</h1>
+          <form onSubmit={this.handleSubmit}>
+            <Select
+              className="search-bar"
+              options={this.state.pokemonResults}
+              onChange={this.handleChange}
+              value={selectedOption}
+            />
+          </form>
+          <div>
+            <InfoBox
+              pokemon={this.state.search}
+              image={this.state.image}
+              pokemonType={this.state.pokemonType}
+              attack={this.state.attack}
+              defense={this.state.defense}
+              speed={this.state.speed}
+            />
+          </div>
+        </div>
+        <div className="column">
+          <PokemonGraph
+            className="pokemon-graph column"
+            attack={this.state.attack}
+            defense={this.state.defense}
+            speed={this.state.speed}
           />
         </div>
       </div>

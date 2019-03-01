@@ -1,11 +1,32 @@
 body {
   background: #fdfdfd;
+  margin-left: 50px;
 
-  h1 {
+  h1,
+  h2,
+  h3 {
     color: black;
+    font-family: "Work Sans", sans-serif;
   }
 
-  .search-container {
+  .column {
+    float: left;
+    flex: 30%;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .pokemon-graph {
+    align-items: center;
+    font-family: "Work Sans", sans-serif;
+  }
+
+  /* Clear floats after the columns */
+  .row {
+    display: flex;
+  }
+
+  .search-bar {
     border-radius: 2px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     display: block;
@@ -13,6 +34,7 @@ body {
     width: 300px;
     display: grid;
     grid-row-gap: 50px;
+    font-family: "Work Sans", sans-serif;
   }
 
   .fire {
@@ -90,7 +112,10 @@ body {
     height: 300px;
   }
   .pokemon-info {
-    text-align: center;
+    margin-left: 20px;
+  }
+  .pokemon-name {
+    font-family: sans-serif;
   }
   .info-box {
     display: grid;

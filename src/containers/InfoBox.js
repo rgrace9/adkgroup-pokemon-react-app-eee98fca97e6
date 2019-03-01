@@ -7,14 +7,18 @@ class InfoBox extends Component {
   }
 
   render() {
-    // if (){
-    //
-    // }
+    let attack = `Attack: ${this.props.attack}`;
+    let defense = `Defense: ${this.props.defense}`;
     return (
       <div className="info-box">
         <div className={this.props.pokemonType}>
-          <img src={this.props.image} />
-          <h2 className="pokemon-info">{this.props.pokemon.name}</h2>
+          <img src={this.props.image} alt={this.props.pokemon.name} />
+          <div className="pokemon-info">
+            <h2 className="pokemon-name">{this.props.pokemon.name}</h2>
+            <h2>{attack}</h2>
+            <h2>{defense}</h2>
+            <h2>Speed: {this.props.speed}</h2>
+          </div>
         </div>
       </div>
     );
