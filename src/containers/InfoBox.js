@@ -7,12 +7,15 @@ class InfoBox extends Component {
   }
 
   render() {
+    // if (){
+    //
+    // }
     return (
-      <div>
-        <h2>{this.props.pokemon.name}</h2>
-        <h2>{this.props.pokemon.height}</h2>
-        <h2>{this.props.pokemon.weight}</h2>
-        <img src={this.props.details} />
+      <div className="info-box">
+        <div className={this.props.pokemonType}>
+          <img src={this.props.image} />
+          <h2 className="pokemon-info">{this.props.pokemon.name}</h2>
+        </div>
       </div>
     );
   }

@@ -1,21 +1,49 @@
 import React, { Component } from "react";
 import InfoBox from "./InfoBox";
 import PokemonField from "../components/PokemonField";
-import AutoSuggest from "../components/AutoSuggest";
+import Select from "react-select";
+//recharts
 
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       search: "",
-      pokemonUrl: "",
+      image: "",
       details: "",
-      pokemons: []
+      pokemonType: "",
+      selectedOption: null,
+      pokemonResults: []
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.pokemonSearch = this.pokemonSearch.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(`https://pokeapi.co/api/v2/pokemon/?limit=964`)
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+            error = new Error(errorMessage);
+          throw error;
+        }
+      })
+      .then(response => response.json())
+      .then(pokemon => {
+        let pokemonArray = pokemon.results.map(pokemon => {
+          let option = {};
+          option["value"] = pokemon.name;
+          option["label"] = pokemon.name;
+          return option;
+        });
+        this.setState({
+          pokemonResults: pokemonArray
+        });
+      })
+      .catch(error => console.log(`Error in fetch: ${error.message}`));
   }
 
   pokemonSearch(pokemon) {
@@ -34,39 +62,18 @@ class SearchContainer extends Component {
         console.log(pokemonInfo);
         this.setState({
           search: pokemonInfo,
-          pokemonUrl: pokemonInfo.forms[0].url
+          image: pokemonInfo.sprites.front_default,
+          pokemonType: pokemonInfo.types[0].type.name
         });
-        console.log(this.state.pokemonUrl);
-
-        return fetch(this.state.pokemonUrl);
       })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => response.json())
-      .then(pokemonInfo => {
-        console.log(pokemonInfo);
-        debugger;
-        this.setState({
-          details: pokemonInfo.sprites.front_default
-        });
-      });
+      .catch(error => console.log(`Error in fetch: ${error.message}`));
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.pokemonSearch(this.state.search);
-  }
+  handleChange = selectedOption => {
+    this.setState({ selectedOption: selectedOption });
+    this.pokemonSearch(selectedOption.value);
+    this.handleClear();
+  };
 
   handleClear() {
     this.setState({
@@ -75,28 +82,23 @@ class SearchContainer extends Component {
   }
 
   render() {
+    const { selectedOption } = this.state;
     return (
       <div>
         <h1>Search for Pokémon</h1>
         <form onSubmit={this.handleSubmit}>
-          <PokemonField
-            content={this.state.search}
+          <Select
+            className="search-container"
+            options={this.state.pokemonResults}
             onChange={this.handleChange}
-            name="search"
-          />
-          <input type="submit" />
-          <AutoSuggest
-            pokemon_suggestions={this.state.pokemons}
-            onChange={this.handleChange}
-            name="pokemons"
+            value={selectedOption}
           />
         </form>
         <div>
           <InfoBox
             pokemon={this.state.search}
-            url={this.state.pokemonUrl}
-            pokemonAdvancedSearch={this.pokemonAdvancedSearch}
-            details={this.state.details}
+            image={this.state.image}
+            pokemonType={this.state.pokemonType}
           />
         </div>
       </div>
