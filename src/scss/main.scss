@@ -1,22 +1,41 @@
 body {
   background: #fdfdfd;
-  margin-left: 50px;
+  margin: 30px;
+  // border-style: solid;
 
   h1,
   h2,
   h3 {
     color: black;
     font-family: "Work Sans", sans-serif;
+
+    @media only screen and (min-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+      font-size: 12px;
+    }
   }
 
   .column {
     float: left;
     flex: 30%;
-    padding: 10px;
   }
+
+  .graph-column {
+    float: left;
+    flex: 30%;
+  }
+
   .react-switch-handle {
-    background: red;
+    background: red !important;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    border: 5px solid #000;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: inset 0px 2px 0 10px #ff0000;
   }
+
   .toggle {
     font-size: 20px;
     padding: 10px;
@@ -31,6 +50,7 @@ body {
   .pokemon-graph {
     align-items: center;
     font-family: "Work Sans", sans-serif;
+    font-size: 18px;
   }
 
   .row {
@@ -51,6 +71,7 @@ body {
     display: grid;
     grid-row-gap: 50px;
     font-family: "Work Sans", sans-serif;
+    font-size: 20px;
   }
 
   .fire {
@@ -132,6 +153,7 @@ body {
   }
   .pokemon-name {
     font-family: sans-serif;
+    font-size: 35px;
   }
   .info-box {
     display: grid;

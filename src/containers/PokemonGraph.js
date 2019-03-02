@@ -11,13 +11,12 @@ import {
   CartesianGrid
 } from "recharts";
 
-// const data = [{ name: "Defense", stat: 300 }, { name: "Attack", stat: 250 }];
-
 class PokemonGraph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: false,
+      data: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -37,26 +36,27 @@ class PokemonGraph extends Component {
       { name: "Hit Points", value: this.props.hitPoints }
     ];
 
-    // let cellColor;
-    // let barColors = data.map((name, value) => {
-    //   if (value >= 50) {
-    //     cellColor = "#cc0000";
-    //   } else if (value < 50 && value >= 20) {
-    //     cellColor = "#FFFF00";
-    //   } else if (value < 20) {
-    //     cellColor = "#808080";
-    //   }
-    // });
     var data;
+
     if (this.state.checked === false) {
       data = statistics;
     } else if (this.state.checked === true) {
       data = moves;
     }
 
+    let cellColor;
+    data.forEach(name => {
+      if (name.value >= 50) {
+        cellColor = "#cc0000";
+      } else if (name.value < 50 && name.value >= 20) {
+        cellColor = "#FFFF00";
+      } else if (name.value < 20) {
+        cellColor = "#808080";
+      }
+    });
+
     return (
       <div>
-        <h1 className="graph-heading">Pokemon Graph Container</h1>
         <div className="toggle-row">
           <div className="pokemon-graph">
             <label>
@@ -68,8 +68,8 @@ class PokemonGraph extends Component {
                 uncheckedIcon={false}
                 height={35}
                 width={70}
-                className="toggle-container graph-heading"
-                style={"background: yellow"}
+                onColor={"#1b5be4"}
+                offColor={"#1b5be4"}
               />
               <span className="toggle">Moves</span>
             </label>
@@ -80,12 +80,13 @@ class PokemonGraph extends Component {
           width={800}
           height={500}
           data={data}
+          margin={{ top: 30 }}
         >
           <XAxis dataKey="name" stroke="#2E2C2C" />
           <YAxis />
           <Tooltip />
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey="value" barSize={100} fill={"#808080"} />
+          <Bar dataKey="value" barSize={100} fill={cellColor} />;
         </BarChart>
       </div>
     );

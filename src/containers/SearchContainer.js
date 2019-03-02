@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import InfoBox from "./InfoBox";
 import PokemonGraph from "./PokemonGraph";
-
 import Select from "react-select";
-//recharts
 
 class SearchContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       search: "",
+      name: "",
       image: "",
       details: "",
       pokemonType: "",
@@ -20,10 +19,10 @@ class SearchContainer extends Component {
       specialDefense: "",
       hitPoints: "",
       selectedOption: null,
-      pokemonResults: []
+      pokemonResults: [],
+      showInfoBox: false
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleClear = this.handleClear.bind(this);
     this.pokemonSearch = this.pokemonSearch.bind(this);
   }
 
@@ -43,7 +42,8 @@ class SearchContainer extends Component {
         let pokemonArray = pokemon.results.map(pokemon => {
           let option = {};
           option["value"] = pokemon.name;
-          option["label"] = pokemon.name;
+          option["label"] =
+            pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
           return option;
         });
         this.setState({
@@ -66,17 +66,18 @@ class SearchContainer extends Component {
       })
       .then(response => response.json())
       .then(pokemonInfo => {
-        console.log(pokemonInfo);
         this.setState({
           search: pokemonInfo,
+          name: pokemonInfo.forms[0].name,
           image: pokemonInfo.sprites.front_default,
-          pokemonType: pokemonInfo.types[0].type.name,
+          pokemonType: pokemonInfo.types[1].type.name,
           defense: pokemonInfo.stats[3].base_stat,
           attack: pokemonInfo.stats[4].base_stat,
           speed: pokemonInfo.stats[0].base_stat,
           specialAttack: pokemonInfo.stats[2].base_stat,
           specialDefense: pokemonInfo.stats[1].base_stat,
-          hitPoints: pokemonInfo.stats[5].base_stat
+          hitPoints: pokemonInfo.stats[5].base_stat,
+          showInfoBox: true
         });
       })
       .catch(error => console.log(`Error in fetch: ${error.message}`));
@@ -85,42 +86,41 @@ class SearchContainer extends Component {
   handleChange = selectedOption => {
     this.setState({ selectedOption: selectedOption });
     this.pokemonSearch(selectedOption.value);
-    this.handleClear();
   };
-
-  handleClear() {
-    this.setState({
-      search: ""
-    });
-  }
 
   render() {
     const { selectedOption } = this.state;
+    let infoBox;
+
+    if (this.state.showInfoBox) {
+      infoBox = (
+        <InfoBox
+          className="info-box"
+          pokemon={this.state.search}
+          image={this.state.image}
+          pokemonType={this.state.pokemonType}
+          attack={this.state.attack}
+          defense={this.state.defense}
+          speed={this.state.speed}
+        />
+      );
+    }
     return (
       <div className="row">
         <div className="column">
           <h1>Search for Pokémon</h1>
           <form onSubmit={this.handleSubmit}>
             <Select
+              placeholder="Search"
               className="search-bar"
               options={this.state.pokemonResults}
               onChange={this.handleChange}
               value={selectedOption}
             />
           </form>
-          <div>
-            <InfoBox
-              className="info-box"
-              pokemon={this.state.search}
-              image={this.state.image}
-              pokemonType={this.state.pokemonType}
-              attack={this.state.attack}
-              defense={this.state.defense}
-              speed={this.state.speed}
-            />
-          </div>
+          <div>{infoBox}</div>
         </div>
-        <div className="column">
+        <div className="graph-column">
           <PokemonGraph
             className="pokemon-graph column"
             attack={this.state.attack}
