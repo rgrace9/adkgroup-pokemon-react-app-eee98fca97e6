@@ -16,6 +16,9 @@ class SearchContainer extends Component {
       defense: "",
       attack: "",
       speed: "",
+      specialAttack: "",
+      specialDefense: "",
+      hitPoints: "",
       selectedOption: null,
       pokemonResults: []
     };
@@ -70,7 +73,10 @@ class SearchContainer extends Component {
           pokemonType: pokemonInfo.types[0].type.name,
           defense: pokemonInfo.stats[3].base_stat,
           attack: pokemonInfo.stats[4].base_stat,
-          speed: pokemonInfo.stats[0].base_stat
+          speed: pokemonInfo.stats[0].base_stat,
+          specialAttack: pokemonInfo.stats[2].base_stat,
+          specialDefense: pokemonInfo.stats[1].base_stat,
+          hitPoints: pokemonInfo.stats[5].base_stat
         });
       })
       .catch(error => console.log(`Error in fetch: ${error.message}`));
@@ -104,6 +110,7 @@ class SearchContainer extends Component {
           </form>
           <div>
             <InfoBox
+              className="info-box"
               pokemon={this.state.search}
               image={this.state.image}
               pokemonType={this.state.pokemonType}
@@ -119,6 +126,9 @@ class SearchContainer extends Component {
             attack={this.state.attack}
             defense={this.state.defense}
             speed={this.state.speed}
+            specialAttack={this.state.specialAttack}
+            specialDefense={this.state.specialDefense}
+            hitPoints={this.state.hitPoints}
           />
         </div>
       </div>

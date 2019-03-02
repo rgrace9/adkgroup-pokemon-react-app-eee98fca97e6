@@ -13,9 +13,16 @@ body {
     float: left;
     flex: 30%;
     padding: 10px;
-    align-items: center;
   }
 
+  .toggle {
+    font-size: 20px;
+    padding: 10px;
+    text-align: center;
+  }
+  .toggle-container {
+    align-items: center;
+  }
   .pokemon-graph {
     align-items: center;
     font-family: "Work Sans", sans-serif;
@@ -24,6 +31,10 @@ body {
   /* Clear floats after the columns */
   .row {
     display: flex;
+  }
+
+  .graph-heading {
+    text-align: center;
   }
 
   .search-bar {
