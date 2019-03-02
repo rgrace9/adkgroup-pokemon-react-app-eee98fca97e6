@@ -14,7 +14,9 @@ body {
     flex: 30%;
     padding: 10px;
   }
-
+  .react-switch-handle {
+    background: red;
+  }
   .toggle {
     font-size: 20px;
     padding: 10px;
@@ -23,14 +25,17 @@ body {
   .toggle-container {
     align-items: center;
   }
+  .toggle-row {
+    text-align: center;
+  }
   .pokemon-graph {
     align-items: center;
     font-family: "Work Sans", sans-serif;
   }
 
-  /* Clear floats after the columns */
   .row {
     display: flex;
+    max-width: 650px;
   }
 
   .graph-heading {

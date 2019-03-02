@@ -57,20 +57,23 @@ class PokemonGraph extends Component {
     return (
       <div>
         <h1 className="graph-heading">Pokemon Graph Container</h1>
-        <div className="toggle-container">
-          <label className="pokemon-graph">
-            <span className="toggle">Statistics</span>
-            <Switch
-              onChange={this.handleChange}
-              checked={this.state.checked}
-              checkedIcon={false}
-              uncheckedIcon={false}
-              height={35}
-              width={70}
-              className="toggle-container"
-            />
-            <span className="toggle">Moves</span>
-          </label>
+        <div className="toggle-row">
+          <div className="pokemon-graph">
+            <label>
+              <span className="toggle">Statistics</span>
+              <Switch
+                onChange={this.handleChange}
+                checked={this.state.checked}
+                checkedIcon={false}
+                uncheckedIcon={false}
+                height={35}
+                width={70}
+                className="toggle-container graph-heading"
+                style={"background: yellow"}
+              />
+              <span className="toggle">Moves</span>
+            </label>
+          </div>
         </div>
         <BarChart
           className="pokemon-graph"
