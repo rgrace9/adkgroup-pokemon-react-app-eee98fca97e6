@@ -35,15 +35,11 @@ body {
   }
 
   .react-switch-handle {
-    background: red !important;
+    background-image: url("./pokemon_ball.png") !important;
+    background-size: cover !important;
     position: relative;
-    width: 200px;
-    height: 200px;
-    background: #fff;
-    border: 5px solid #000;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: inset 0px 2px 0 10px #ff0000;
   }
 
   .moves-container {
