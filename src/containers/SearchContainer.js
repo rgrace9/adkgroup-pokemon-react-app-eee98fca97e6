@@ -18,12 +18,17 @@ class SearchContainer extends Component {
       speed: "",
       selectedOption: null,
       pokemonResults: [],
-      showInfoBox: false
+      showInfoBox: false,
+      snowfall: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.pokemonSearch = this.pokemonSearch.bind(this);
+    this.showSnow = this.showSnow.bind(this);
   }
 
+  showSnow() {
+    this.setState({ snowfall: true });
+  }
   componentDidMount() {
     fetch(`https://pokeapi.co/api/v2/pokemon/?limit=964`)
       .then(response => {
@@ -87,6 +92,30 @@ class SearchContainer extends Component {
   render() {
     const { selectedOption } = this.state;
     let infoBox;
+    let easterEgg;
+
+    if (this.state.pokemonType === "ice") {
+      easterEgg = (
+        <div className="snowflakes">
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+        </div>
+      );
+    } else if (this.state.pokemonType === "fire") {
+      easterEgg = <div className="fire-flash" />;
+    } else if (this.state.pokemonType === "electric") {
+      easterEgg = <div className="electricity" />;
+    }
 
     if (this.state.showInfoBox) {
       infoBox = (
@@ -98,11 +127,13 @@ class SearchContainer extends Component {
           attack={this.state.attack}
           defense={this.state.defense}
           speed={this.state.speed}
+          type={this.state.pokemonType}
         />
       );
     }
     return (
       <div className="row">
+        {easterEgg}
         <div className="column">
           <h1>Search for Pokémon</h1>
           <form onSubmit={this.handleSubmit}>

@@ -82,10 +82,10 @@ class PokemonGraph extends Component {
                 checked={this.state.checked}
                 checkedIcon={false}
                 uncheckedIcon={false}
-                height={35}
-                width={70}
-                onColor={"#1b5be4"}
-                offColor={"#1b5be4"}
+                height={45}
+                width={90}
+                onColor={"#E0E0E0"}
+                offColor={"#E0E0E0"}
               />
               <span className="toggle">Moves</span>
             </label>
