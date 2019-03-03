@@ -8,12 +8,22 @@ body {
   h3 {
     color: black;
     font-family: "Work Sans", sans-serif;
-
-    @media only screen and (min-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
-      font-size: 12px;
-    }
+    //
+    // @media only screen and (min-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+    //   font-size: 12px;
+    // }
   }
 
+  // align-items: center;
+  // font-family: "Work Sans", sans-serif;
+  // font-size: 18px;
+  // margin-top: 25px;
+
+  .statistics-moves-container {
+    display: flex;
+    align-items: center;
+    flex: 70%;
+  }
   .column {
     float: left;
     flex: 30%;
@@ -36,26 +46,44 @@ body {
     box-shadow: inset 0px 2px 0 10px #ff0000;
   }
 
+  .moves-container {
+    height: 500px;
+    width: 800px;
+    overflow: scroll;
+    align-items: center;
+    margin-left: 30px;
+    margin-top: 50px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  .moves-text {
+    font-size: 25px;
+    font-family: "Work Sans", sans-serif;
+    text-align: center;
+    font-weight: bold;
+  }
   .toggle {
-    font-size: 20px;
+    font-size: 30px;
     padding: 10px;
     text-align: center;
+    font-family: "Work Sans", sans-serif;
   }
   .toggle-container {
     align-items: center;
   }
   .toggle-row {
     text-align: center;
+    position: flex;
   }
   .pokemon-graph {
     align-items: center;
     font-family: "Work Sans", sans-serif;
     font-size: 18px;
+    margin-top: 25px;
   }
 
   .row {
     display: flex;
-    max-width: 650px;
+    max-width: 750px;
   }
 
   .graph-heading {

@@ -24,25 +24,11 @@ class PokemonGraph extends Component {
     this.setState({ checked });
   }
   render() {
-    let statistics = [
+    let data = [
       { name: "Attack", value: this.props.attack },
       { name: "Defense", value: this.props.defense },
       { name: "Speed", value: this.props.speed }
     ];
-
-    let moves = [
-      { name: "Special Attack", value: this.props.specialAttack },
-      { name: "Special Defense", value: this.props.specialDefense },
-      { name: "Hit Points", value: this.props.hitPoints }
-    ];
-
-    var data;
-
-    if (this.state.checked === false) {
-      data = statistics;
-    } else if (this.state.checked === true) {
-      data = moves;
-    }
 
     let cellColor;
     data.forEach(name => {
@@ -54,6 +40,36 @@ class PokemonGraph extends Component {
         cellColor = "#808080";
       }
     });
+
+    let pokemonGraph = (
+      <div className="pokemon-graph">
+        <BarChart width={800} height={500} data={data} margin={{ top: 30 }}>
+          <XAxis dataKey="name" stroke="#2E2C2C" />
+          <YAxis />
+          <Tooltip />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <Bar dataKey="value" barSize={100} fill={cellColor} />;
+        </BarChart>
+      </div>
+    );
+
+    let pokemonMoves = this.props.moves.map((move, index) => {
+      return (
+        <div key={index}>
+          <p className="moves-text">{move.move.name}</p>
+        </div>
+      );
+    });
+
+    let movesBox = <div className="moves-container">{pokemonMoves}</div>;
+
+    let pokemonToggle;
+
+    if (this.state.checked === false) {
+      pokemonToggle = pokemonGraph;
+    } else if (this.state.checked === true) {
+      pokemonToggle = movesBox;
+    }
 
     return (
       <div>
@@ -75,19 +91,7 @@ class PokemonGraph extends Component {
             </label>
           </div>
         </div>
-        <BarChart
-          className="pokemon-graph"
-          width={800}
-          height={500}
-          data={data}
-          margin={{ top: 30 }}
-        >
-          <XAxis dataKey="name" stroke="#2E2C2C" />
-          <YAxis />
-          <Tooltip />
-          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-          <Bar dataKey="value" barSize={100} fill={cellColor} />;
-        </BarChart>
+        <div className="statistics-moves-container">{pokemonToggle}</div>
       </div>
     );
   }

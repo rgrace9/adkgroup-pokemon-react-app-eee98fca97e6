@@ -10,14 +10,12 @@ class SearchContainer extends Component {
       search: "",
       name: "",
       image: "",
+      moves: [],
       details: "",
       pokemonType: "",
       defense: "",
       attack: "",
       speed: "",
-      specialAttack: "",
-      specialDefense: "",
-      hitPoints: "",
       selectedOption: null,
       pokemonResults: [],
       showInfoBox: false
@@ -70,13 +68,11 @@ class SearchContainer extends Component {
           search: pokemonInfo,
           name: pokemonInfo.forms[0].name,
           image: pokemonInfo.sprites.front_default,
-          pokemonType: pokemonInfo.types[1].type.name,
+          pokemonType: pokemonInfo.types[0].type.name,
           defense: pokemonInfo.stats[3].base_stat,
           attack: pokemonInfo.stats[4].base_stat,
           speed: pokemonInfo.stats[0].base_stat,
-          specialAttack: pokemonInfo.stats[2].base_stat,
-          specialDefense: pokemonInfo.stats[1].base_stat,
-          hitPoints: pokemonInfo.stats[5].base_stat,
+          moves: pokemonInfo.moves,
           showInfoBox: true
         });
       })
@@ -126,9 +122,7 @@ class SearchContainer extends Component {
             attack={this.state.attack}
             defense={this.state.defense}
             speed={this.state.speed}
-            specialAttack={this.state.specialAttack}
-            specialDefense={this.state.specialDefense}
-            hitPoints={this.state.hitPoints}
+            moves={this.state.moves}
           />
         </div>
       </div>
