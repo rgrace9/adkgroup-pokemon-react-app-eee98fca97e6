@@ -19,7 +19,6 @@ class InfoBox extends Component {
             <h2>Attack: {this.props.attack}</h2>
             <h2>Defense: {this.props.defense}</h2>
             <h2>Speed: {this.props.speed}</h2>
-            <h2>Type: {this.props.type}</h2>
           </div>
         </div>
       </div>
