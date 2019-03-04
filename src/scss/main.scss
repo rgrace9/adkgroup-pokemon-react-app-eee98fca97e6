@@ -9,6 +9,13 @@ body {
     font-family: "Work Sans", sans-serif;
   }
 
+  .game-font {
+    color: black;
+  }
+  .pokemon-game {
+    font-family: "Work Sans", sans-serif;
+  }
+
   // http://pajasevi.github.io/CSSnowflakes/
 
   .snowflake {
@@ -195,6 +202,23 @@ body {
     flex: 30%;
   }
 
+  .column-left {
+    float: left;
+    flex: 30%;
+  }
+  .column-right {
+    float: right;
+    flex: 30%;
+  }
+  .game-row {
+    display: flex;
+    max-width: 650px;
+    text-align: center;
+  }
+  .game-container {
+    margin-left: 20px;
+  }
+
   .graph-column {
     float: left;
     flex: 30%;
@@ -226,7 +250,17 @@ body {
       transform: translate(0, 0) rotate(0);
     }
   }
-
+  .moves-checkbox {
+  }
+  .moves-form {
+    height: 300px;
+    width: 300px;
+    overflow: scroll;
+    align-items: left;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    text-align: left;
+    font-family: "Work Sans", sans-serif;
+  }
   .moves-container {
     height: 500px;
     width: 800px;
