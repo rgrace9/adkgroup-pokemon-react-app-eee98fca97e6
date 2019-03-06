@@ -9,6 +9,15 @@ body {
     font-family: "Work Sans", sans-serif;
   }
 
+  button {
+    font-size: 16px;
+    font-family: "Work Sans", sans-serif;
+  }
+
+  button.game-button {
+    padding: 15px 30px;
+    margin-top: 10px;
+  }
   .game-font {
     color: black;
   }

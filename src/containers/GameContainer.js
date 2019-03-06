@@ -231,7 +231,9 @@ class GameContainer extends Component {
             Return Home
           </Link>
         </div>
-        <button onClick={this.playGame}>Play Game</button>
+        <button className="game-button" onClick={this.playGame}>
+          Play Game
+        </button>
         <div className="game-row">
           <div className="column-left">
             <h1>{this.state.nameOne}</h1>
