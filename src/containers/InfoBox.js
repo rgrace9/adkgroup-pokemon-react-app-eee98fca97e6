@@ -3,42 +3,24 @@ import React, { Component } from "react";
 class InfoBox extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      details: ""
-    };
-    this.pokemonAdvancedSearch = this.pokemonAdvancedSearch.bind(this);
-  }
-
-  pokemonAdvancedSearch() {
-    fetch(this.props.pokemon.forms[0].url)
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status} (${response.statusText})`,
-            error = new Error(errorMessage);
-          throw error;
-        }
-      })
-      .then(response => response.json())
-      .then(pokemonInfo => {
-        console.log(pokemonInfo);
-        this.setState({
-          details: pokemonInfo
-        });
-      })
-      .catch(error => console.log(`Error in fetch: ${error.message}`));
+    this.state = {};
   }
 
   render() {
-    // if (this.props.pokemon.length > 0) {
-    //   return this.pokemonAdvancedSearch();
-    // }
     return (
-      <div>
-        <h2>{this.props.pokemon.name}</h2>
-        <h2>{this.props.pokemon.height}</h2>
-        <h2>{this.props.pokemon.weight}</h2>
+      <div className="column">
+        <div className={this.props.pokemonType}>
+          <img src={this.props.image} alt={this.props.pokemon.name} />
+          <div className="pokemon-info">
+            <h2 className="pokemon-name">
+              {this.props.pokemon.name.charAt(0).toUpperCase() +
+                this.props.pokemon.name.slice(1)}
+            </h2>
+            <h2>Attack: {this.props.attack}</h2>
+            <h2>Defense: {this.props.defense}</h2>
+            <h2>Speed: {this.props.speed}</h2>
+          </div>
+        </div>
       </div>
     );
   }
