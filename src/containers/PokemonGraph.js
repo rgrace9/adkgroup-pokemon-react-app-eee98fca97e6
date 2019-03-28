@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import Switch from "react-switch";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Cell,
-  CartesianGrid
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 
 class PokemonGraph extends Component {
   constructor(props) {

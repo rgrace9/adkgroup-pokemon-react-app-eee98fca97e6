@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import SearchContainer from "./containers/SearchContainer";
+import GameContainer from "./containers/GameContainer";
+import { Router, browserHistory, Route } from "react-router";
 import "./scss/main.scss";
-
-import { connect } from "react-redux";
-import * as actions from "./redux/actions";
 
 class App extends Component {
   constructor(props) {
@@ -12,7 +11,12 @@ class App extends Component {
   }
 
   render() {
-    return <SearchContainer />;
+    return (
+      <Router history={browserHistory}>
+        <Route path="/" component={SearchContainer} />
+        <Route path="/game" component={GameContainer} />
+      </Router>
+    );
   }
 }
 

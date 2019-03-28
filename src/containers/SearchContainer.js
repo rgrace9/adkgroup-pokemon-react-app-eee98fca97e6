@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import InfoBox from "./InfoBox";
 import PokemonGraph from "./PokemonGraph";
 import Select from "react-select";
+import { Link } from "react-router";
 
 class SearchContainer extends Component {
   constructor(props) {
@@ -111,11 +112,12 @@ class SearchContainer extends Component {
           <div className="snowflake">❆</div>
         </div>
       );
-    } else if (this.state.pokemonType === "fire") {
-      easterEgg = <div className="fire-flash" />;
-    } else if (this.state.pokemonType === "electric") {
-      easterEgg = <div className="electricity" />;
     }
+    // else if (this.state.pokemonType === "fire") {
+    //   easterEgg = <div className="fire-flash" />;
+    // } else if (this.state.pokemonType === "electric") {
+    //   easterEgg = <div className="electricity" />;
+    // }
 
     if (this.state.showInfoBox) {
       infoBox = (
@@ -132,29 +134,38 @@ class SearchContainer extends Component {
       );
     }
     return (
-      <div className="row">
-        {easterEgg}
-        <div className="column">
-          <h1>Search for Pokémon</h1>
-          <form onSubmit={this.handleSubmit}>
-            <Select
-              placeholder="Search"
-              className="search-bar"
-              options={this.state.pokemonResults}
-              onChange={this.handleChange}
-              value={selectedOption}
-            />
-          </form>
-          <div>{infoBox}</div>
+      <div>
+        <div className="pokemon-game">
+          <Link className="game-font" to="/game">
+            Play Game!
+          </Link>
         </div>
-        <div className="graph-column">
-          <PokemonGraph
-            className="pokemon-graph column"
-            attack={this.state.attack}
-            defense={this.state.defense}
-            speed={this.state.speed}
-            moves={this.state.moves}
-          />
+
+        <div className="row">
+          {easterEgg}
+
+          <div className="column">
+            <h1>Search for Pokémon</h1>
+            <form onSubmit={this.handleSubmit}>
+              <Select
+                placeholder="Search"
+                className="search-bar"
+                options={this.state.pokemonResults}
+                onChange={this.handleChange}
+                value={selectedOption}
+              />
+            </form>
+            <div>{infoBox}</div>
+          </div>
+          <div className="graph-column">
+            <PokemonGraph
+              className="pokemon-graph column"
+              attack={this.state.attack}
+              defense={this.state.defense}
+              speed={this.state.speed}
+              moves={this.state.moves}
+            />
+          </div>
         </div>
       </div>
     );
